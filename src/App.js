@@ -6,6 +6,7 @@ import UpdateUserForm from './components/UpdateUserForm';
 
 
 
+
 function App() {
 
   const userData = [
@@ -46,32 +47,39 @@ function App() {
     })
   }
 
+  const updateUser = (id, updateUser) => {
+    setEditing(false)
+
+    setUsers(users.map(users => (users.id === id ? updateUser : users)))
+  }
+
 
 
   return (
-    <div className='container'>
-      <h1>CRUD App with Hooks</h1>
+    <div className='container-fluid'>
+      <center><h1 className="alert alert-warning">CRUD App with Hooks</h1></center>
       <div className='flex-row'>
         <div className='flex-large'>
 
           {
             editing ? (
               <div>
-                <center><h2>Update user</h2></center>
+                <center><h2 className='alert alert-primary'>Update user</h2></center>
                 <UpdateUserForm 
                   currentUser={currentUser}
+                  updateUser={updateUser}
                 />
               </div>
             ) : (
               <div>
-                <center><h2>Add user</h2></center>
+                <center><h2 className='alert alert-primary'>Add user</h2></center>
                 <AddUserForm addUser={addUser}/>
               </div>
             )
             }    
         </div>
         <div className='flex-large'>
-          <center><h2>View users</h2></center>
+          <center><h2 className='alert alert-primary'>View users</h2></center>
           <UserTable 
             users={users} 
             deleteUser={deleteUser} 
